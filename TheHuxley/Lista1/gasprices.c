@@ -6,7 +6,7 @@ int main()
 
     scanf("%f %f %f", &galaoGasolinaDolares, &litroGasolinaReaisBR, &umDollarParaRealCotacao);
 
-    litroGasolinaReaisUS = (galaoGasolinaDolares * umDollarParaRealCotacao) / 3.78541f;
+    litroGasolinaReaisUS = (galaoGasolinaDolares * umDollarParaRealCotacao) / 3.8f;
 
     printf("Gasolina EUA: R$ %0.2f\nGasolina Brasil: R$ %0.2f\n", litroGasolinaReaisUS, litroGasolinaReaisBR);
 
@@ -16,11 +16,11 @@ int main()
     }
     else if (litroGasolinaReaisUS < litroGasolinaReaisBR)
     {
-        printf("Mais barata nos Estados Unidos\n");
+        printf("Mais barata nos EUA\n");
     }
     else
     {
-        printf("Mesmo preco\n");
+        printf("Igual\n");
     }
 
     return 0;

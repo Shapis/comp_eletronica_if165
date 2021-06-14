@@ -17,7 +17,7 @@ int solveProblem(int a, int b)
     }
 
     // Enquanto (a-b) for maior que 3, continue adicionando 3 em b.
-    while ((a - b) >= 3)
+    while ((a - b) >= 3 && (a - b) != 4)
     {
         b += 3;
         movimentos++;
@@ -29,6 +29,7 @@ int solveProblem(int a, int b)
     // Se o resto for 0, nao precisamos fazer nada, pois os 2 numeros sao iguais.
     // Se o resto for 1, adicionamos 3 ao numero menor e 2 ao maior, logo, 2 movimentos extra.
     // Se o resto for 2, adicionamos 2 ao numero menor, logo, 1 movimento extra.
+    // Se o resto for 4, adicionamos 2 ao numero menor, duas vezes.
     switch (resto)
     {
     case 0:
@@ -39,6 +40,9 @@ int solveProblem(int a, int b)
         break;
     case 2:
         movimentos++;
+        break;
+    case 4:
+        movimentos += 2;
         break;
 
     default:

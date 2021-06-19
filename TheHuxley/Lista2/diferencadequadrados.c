@@ -8,35 +8,18 @@ int intSquared(int x)
 int main()
 {
     int input;
-    int depth = 100000;
+    int breakCondition = 1;
 
-    while (1)
+    while (breakCondition != 0)
     {
-        int breakCondition = 0;
-        scanf("%d", &input);
 
-        if (input != 0)
+        scanf("%d", &input);
+        breakCondition = input;
+        int k = (input - 1) / 2;
+
+        if (breakCondition != 0)
         {
-            for (size_t i = 0; i < depth; i++)
-            {
-                for (size_t j = i + 1; j < depth; j++)
-                {
-                    if (intSquared(j) - intSquared(i) == input)
-                    {
-                        printf("%d - %d\n", intSquared(j), intSquared(i));
-                        breakCondition = 1;
-                        break;
-                    }
-                }
-                if (breakCondition == 1)
-                {
-                    break;
-                }
-            }
-        }
-        else
-        {
-            break;
+            printf("%d - %d\n", (k + 1) * (k + 1), k * k);
         }
     }
 

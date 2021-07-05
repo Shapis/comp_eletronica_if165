@@ -17,32 +17,10 @@ int vowelOrConsonant(char ch)
     }
 }
 
-// Function to perform Selection Sort
-void selectionSort(int arr[], int n)
-{
-    int i, j, min_idx;
-
-    // One by one move boundary of unsorted subarray
-    for (i = 0; i < n - 1; i++)
-    {
-
-        // Find the minimum element in unsorted array
-        min_idx = i;
-        for (j = i + 1; j < n; j++)
-            if (arr[j] < arr[min_idx])
-                min_idx = j;
-
-        // Swap the found minimum element
-        // with the first element
-        swap(&arr[min_idx], &arr[i]);
-    }
-}
-
 int main()
 {
     char lista[3];
-    int n = sizeof(lista) / sizeof(lista[0]);
-    int bool_temVogais = 0;
+    int hasVowels = 0;
 
     scanf("%c %c %c", &lista[0], &lista[1], &lista[2]);
 
@@ -53,22 +31,15 @@ int main()
             printf("Etiquetas erradas!\n");
             return 0;
         }
-        if (!bool_temVogais)
+        if (!hasVowels)
         {
-            bool_temVogais = vowelOrConsonant(lista[i]);
+            hasVowels = vowelOrConsonant(lista[i]);
         }
     }
 
-    selectionSort(lista, n);
-
     int distanciaDasLetras;
 
-    for (int i = 0; i < 3; i++)
-    {
-        int temp = 0;
-    }
-
-    if (lista[0] != lista[1] && lista[1] != lista[2] && lista[0] != lista[2] && lista[2] - lista[1] == lista[1] - lista[0] && (lista[2] - lista[1] > 0) && lista[2] - lista[1] < 4)
+    if (lista[2] - lista[1] == lista[1] - lista[0] && lista[2] - lista[1] > 0 && lista[2] - lista[1] < 4)
     {
         distanciaDasLetras = lista[2] - lista[1];
     }
@@ -81,33 +52,39 @@ int main()
     switch (distanciaDasLetras)
     {
     case 1:
-        if (!bool_temVogais)
+        if (!hasVowels)
         {
             printf("Sequência perfeita.\n");
+            return 0;
         }
         else
         {
             printf("Sequência quase perfeita.\n");
+            return 0;
         }
         break;
     case 2:
-        if (!bool_temVogais)
+        if (!hasVowels)
         {
             printf("Bissequência perfeita.\n");
+            return 0;
         }
         else
         {
             printf("Bissequência quase perfeita.\n");
+            return 0;
         }
         break;
     case 3:
-        if (!bool_temVogais)
+        if (!hasVowels)
         {
             printf("Trissequência perfeita.\n");
+            return 0;
         }
         else
         {
             printf("Trissequência quase perfeita.\n");
+            return 0;
         }
         break;
 

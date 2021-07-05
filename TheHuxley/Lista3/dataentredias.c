@@ -83,7 +83,18 @@ int main()
         _startDate = moveOneDayUp(_startDate);
     }
 
-    printf("%d/%d/%d\n", _startDate.day, _startDate.month, _startDate.year);
+    int horario;
+
+    if (temp % 2 == 0)
+    {
+        horario = 0;
+    }
+    else
+    {
+        horario = 12;
+    }
+
+    printf("%02d/%02d/%d %02d:00\n", _startDate.day, _startDate.month, _startDate.year, horario);
 
     return 0;
 }

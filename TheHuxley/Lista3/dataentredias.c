@@ -1,34 +1,89 @@
 #include <stdio.h>
-#include <time.h>
+
+struct days_date
+{
+    int year;
+    int month;
+    int day;
+};
+
+int days_in_month[2][13] = {
+    {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31},
+    {0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31},
+};
+
+int isLeapYear(int year)
+{
+
+    if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+// int distanceBetweenDates(struct days_date myStartDate, struct days_date myEndDate)
+// {
+//     int temp = 0;
+
+//     while (myStartDate.day != myEndDate.day && myStartDate.month != myEndDate.month && myStartDate.year != myEndDate.year)
+//     {
+//         temp++;
+//         myStartDate = moveOneDayUp(myStartDate);
+//     }
+//     return temp;
+// }
+
+struct days_date moveOneDayUp(struct days_date myStartDate)
+{
+
+    if (myStartDate.day < days_in_month[isLeapYear(myStartDate.year)][myStartDate.month])
+    {
+        myStartDate.day++;
+    }
+    else if (myStartDate.day == days_in_month[isLeapYear(myStartDate.year)][myStartDate.month])
+    {
+        myStartDate.day = 1;
+        myStartDate.month++;
+        if (myStartDate.month > 12)
+        {
+            myStartDate.month = 1;
+            myStartDate.year++;
+        }
+    }
+    return myStartDate;
+}
+
 int main()
 {
-    int month;
-    int secondsBetweenDates;
-    const int secondsInADay = 86400;
-    struct tm start_date;
-    struct tm end_date;
-    time_t start_time, end_time;
 
-    start_date.tm_hour = 0;
-    start_date.tm_min = 0;
-    start_date.tm_sec = 0;
+    struct days_date _startDate;
+    struct days_date _endDate;
+    struct days_date _tempDate;
+    int temp = 0, restoInteiro;
 
-    end_date.tm_hour = 0;
-    end_date.tm_min = 0;
-    end_date.tm_sec = 0;
+    scanf("%d/%d/%d", &_startDate.day, &_startDate.month, &_startDate.year);
+    scanf("%d/%d/%d", &_endDate.day, &_endDate.month, &_endDate.year);
 
-    scanf("%d/%d/%d", &start_date.tm_mday, &month, &start_date.tm_year);
-    start_date.tm_mon = (month - 1);
-    scanf("%d/%d/%d", &end_date.tm_mday, &month, &end_date.tm_year);
-    end_date.tm_mon = (month - 1);
+    _tempDate = _startDate;
 
-    start_time = mktime(&start_date);
-    end_time = mktime(&end_date);
+    while (_tempDate.day != _endDate.day || _tempDate.month != _endDate.month || _tempDate.year != _endDate.year)
+    {
+        temp++;
+        _tempDate = moveOneDayUp(_tempDate);
+    }
 
-    start_date.tm_sec += difftime(end_time, start_time);
-    mktime(&start_date);
+    restoInteiro = temp % 2;
 
-    printf("%02d/%02d/%02d %02d:%02d\n", start_date.tm_mday, start_date.tm_mon + 1, start_date.tm_year, start_date.tm_hour, start_date.tm_min);
+    for (size_t i = 0; i < (temp / 2); i++)
+    {
+        _startDate = moveOneDayUp(_startDate);
+    }
+
+    printf("%d/%d/%d\n", _startDate.day, _startDate.month, _startDate.year);
 
     return 0;
 }

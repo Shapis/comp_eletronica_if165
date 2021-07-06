@@ -17,10 +17,18 @@ int vowelOrConsonant(char ch)
     }
 }
 
+void swap(int *xp, int *yp)
+{
+    int temp = *xp;
+    *xp = *yp;
+    *yp = temp;
+}
+
 int main()
 {
     char lista[3];
     int hasVowels = 0;
+    int n = sizeof(lista) / sizeof(lista[0]);
 
     scanf("%c %c %c", &lista[0], &lista[1], &lista[2]);
 
@@ -34,6 +42,24 @@ int main()
         if (!hasVowels)
         {
             hasVowels = vowelOrConsonant(lista[i]);
+        }
+    }
+
+    int temp = 0;
+
+    //Calculate length of array arr
+    int length = sizeof(lista) / sizeof(lista[0]);
+
+    for (int i = 0; i < length; i++)
+    {
+        for (int j = i + 1; j < length; j++)
+        {
+            if (lista[i] > lista[j])
+            {
+                temp = lista[i];
+                lista[i] = lista[j];
+                lista[j] = temp;
+            }
         }
     }
 

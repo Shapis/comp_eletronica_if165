@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "string_view": "c",
+        "chrono": "c",
+        "algorithm": "c"
+    }
+}

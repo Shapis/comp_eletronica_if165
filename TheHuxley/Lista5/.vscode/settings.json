@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "chrono": "c",
-        "algorithm": "c"
+        "algorithm": "c",
+        "sstream": "c"
     }
 }

@@ -1,53 +1,73 @@
 #include <stdio.h>
 
-// Achado em https://www.geeksforgeeks.org/c-program-multiply-two-matrices/ em primeiro de agosto 2021
-void rotate(int tamanho, int matriz[][tamanho], int sentido)
+void rotate(int linhas, int colunas, int matriz[linhas][colunas], int sentido)
 {
-    int temp[tamanho][tamanho];
+    int temp[colunas][linhas];
+
+    if (sentido == 0)
+    {
+        for (int i = 0; i < linhas; i++)
+        {
+            for (int j = 0; j < colunas; j++)
+            {
+                printf("%d", matriz[i][j]);
+                if (j < colunas - 1)
+                {
+                    printf(" ");
+                }
+            }
+            printf("\n");
+        }
+
+        return;
+    }
 
     if (sentido > 0)
     {
 
-        while (sentido != 0)
+        for (size_t i = 0; i < linhas; i++)
         {
-            for (size_t i = 0; i < tamanho; i++)
+            for (size_t j = 0; j < colunas; j++)
             {
-                for (size_t j = 0; j < tamanho; j++)
-                {
-                    temp[j][tamanho - 1 - i] = matriz[i][j];
-                }
+                temp[j][linhas - 1 - i] = matriz[i][j];
             }
+        }
 
-            for (size_t i = 0; i < tamanho; i++)
-            {
-                for (size_t j = 0; j < tamanho; j++)
-                {
-                    matriz[i][j] = temp[i][j];
-                }
-            }
-            sentido--;
+        sentido--;
+        if (sentido != 0)
+        {
+            rotate(colunas, linhas, temp, sentido);
         }
     }
     else if (sentido < 0)
     {
-        while (sentido != 0)
+        for (size_t i = 0; i < linhas; i++)
         {
-            for (size_t i = 0; i < tamanho; i++)
+            for (size_t j = 0; j < colunas; j++)
             {
-                for (size_t j = 0; j < tamanho; j++)
-                {
-                    temp[tamanho - 1 - j][i] = matriz[i][j];
-                }
+                temp[colunas - 1 - j][i] = matriz[i][j];
             }
+        }
 
-            for (size_t i = 0; i < tamanho; i++)
+        sentido++;
+        if (sentido != 0)
+        {
+            rotate(colunas, linhas, temp, sentido);
+        }
+    }
+    if (sentido == 0)
+    {
+        for (int i = 0; i < colunas; i++)
+        {
+            for (int j = 0; j < linhas; j++)
             {
-                for (size_t j = 0; j < tamanho; j++)
+                printf("%d", temp[i][j]);
+                if (j < linhas - 1)
                 {
-                    matriz[i][j] = temp[i][j];
+                    printf(" ");
                 }
             }
-            sentido++;
+            printf("\n");
         }
     }
 }
@@ -68,20 +88,7 @@ int main()
         }
     }
 
-    rotate(linhas, matriz, rotacoes);
-
-    for (int i = 0; i < linhas; i++)
-    {
-        for (int j = 0; j < linhas; j++)
-        {
-            printf("%d", matriz[i][j]);
-            if (j < linhas - 1)
-            {
-                printf(" ");
-            }
-        }
-        printf("\n");
-    }
+    rotate(linhas, colunas, matriz, rotacoes);
 
     return 0;
 }
